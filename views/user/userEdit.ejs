@@ -1,0 +1,44 @@
+<% layout('layouts/boilerplate') -%>
+
+<div class="row align-items-center d-flex justify-content-center v-100 my-auto">
+  <div class="col-3 offset-3 align-items-center me-auto">
+    <% if (!User.avatar) {%>
+    <img src="https://res.cloudinary.com/dml53vesv/image/upload/w_200/v1618598126/easyTexting/blank-avatar_thtult.png"
+      class="img-card" alt="..." />
+    <% }   else { %> <div class="text-center"> <img src="<%= User.avatar %> " class="img-card  mt-3 mx-3"
+        style="width: 200px;" alt=""></div>
+
+    <% } %>
+  </div>
+  <div class="col-6 align-items-center">
+    <form class="formSize" method="POST" action="/user/<%=User._id%>?_method=PUT" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="Login" class="form-label">Login</label>
+        <input name="UserEdit[username]" type="text" class="form-control" id="Login" value="<%=User.username%>" />
+        <div id="emailHelp" class="form-text">
+          Change your username
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input name="UserEdit[email]" type="email" class="form-control" id="exampleInputEmail1"
+          aria-describedby="emailHelp" value="<%=User.email%>" />
+        <div id="emailHelp" class="form-text">
+          We'll never share your email with anyone else.
+        </div>
+      </div>
+      <div class="input-group">
+        <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04"
+          aria-label="Upload" value="<%=User.avatar  %> " name='image' />
+        <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">
+          Add
+        </button>
+      </div>
+      <div class="my-3 text-center d-grid gap-2 ">
+        <a class="btn btn-danger " href="/user/<%= User.id %>/newpassword"> Change Passowrd </a>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

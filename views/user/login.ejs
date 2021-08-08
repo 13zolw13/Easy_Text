@@ -1,0 +1,37 @@
+<% layout('layouts/boilerplate') -%>
+
+<div class="row align-items-center d-flex justify-content-center v-100 my-auto">
+  <div class="mx-auto col-sm-6 offset-sm-3 justify-content-center">
+    <form action="/user/login" method="POST" class=" formSize justify-content-center mx-auto">
+      <div class="mb-3">
+        <label for="Login" class="form-label">Login</label>
+        <input name="username" type="text" class="form-control" id="Login" />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input name="password" type="password" class="form-control" id="exampleInputPassword1" />
+      </div>
+
+      <a class="text-center  justify-content-center  text-nowrap mt-2 ml-3" href="/user/lostpassword"> Click here if
+        you forgot
+        your
+        password.</a>
+
+      <div class="d-grid gap-2   mt-3">
+        <button class="btn btn-primary" type="submit">Sign in!</button>
+
+
+      </div>
+    </form>
+    <div class="d-grid gap-2 mt-3 mb-3">
+      <form action="/user/login/google" method="GET" class="mx-auto formSize">
+        <button class="btn btn-danger" type="submit">
+          <i class="bi bi-google"></i> Sign in with Google
+        </button>
+    </div>
+  </div>
+  </form>
+</div>
+</div>
+</div>

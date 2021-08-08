@@ -1,0 +1,47 @@
+<% layout('layouts/boilerplate') -%>
+<p class="h1 text-center">Register new user!</p>
+
+<div class="row align-items-center d-flex justify-content-center v-100 my-auto">
+  <div class="col-6 offset-3 justify-content-center mx-auto">
+    <form action="/user/register" method="POST" class="formSize mx-auto">
+      <div class="mb-3">
+        <label for="Login" class="form-label">Login</label>
+        <input name="User[username]" type="text" class="form-control" id="Login" required />
+        <div id="Login" class="form-text">Enter your username.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input name="User[email]" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          required />
+        <div id="emailHelp" class="form-text">
+          We'll never share your email with anyone else.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">
+          New Password</label>
+        <input name="User[password]" type="password" class="form-control" id="exampleInputPassword1" required />
+      </div>
+
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1" required />
+        <label class="form-check-label" for="exampleCheck1">Accept terms</label>
+      </div>
+
+      <div class="d-grid gap-2 mb-3">
+        <button class="btn btn-primary" type="submit">Sign up!</button>
+      </div>
+    </form>
+    
+    <div class="d-grid gap-2 mb-3">
+      <form action="/user/login/google" method="GET" class="mx-auto width:350px">
+        <button class="btn btn-danger" type="submit">
+          <i class="bi bi-google"></i> Sign in with Google
+        </button>
+    </div>
+  </div>
+  </form>
+</div>
+</div>
+</div>

@@ -1,0 +1,58 @@
+<% layout('layouts/boilerplate') -%>
+
+
+<div class="row align-items-center">
+  <div class="col-6 offset-3">
+    <div class="card">
+      <div class="card-body ">
+        <h5 class="card-header mb-3">
+          <% if (target.username){ %>
+          <%=target.username  %>
+          <%}else{ %>
+          <%= target.displayName %>
+          <% } %>
+        </h5>
+        <h5 class="card-title mb-3">Conversation:
+        </h5>
+        <div class="overflow-auto bottom" style="height: 300px;">
+          <ul class="list-group" id="messages">
+            <% for ( let tmp of contact.message){ %>
+            <% if (tmp.sender!=target.id){%>
+            <li class="list-group-item list-group-item-primary"><%=tmp.msg%> </li>
+            <% }else {%>
+            <li class="list-group-item list-group-item-light text-end"><%=tmp.msg%></li>
+
+            <% } %>
+            <% } %>
+          </ul>
+        </div>
+        <div class="row align-items-center mt-3">
+          <div class="form-floating col-9">
+            <textarea name='message' class="form-control" placeholder="Write a message" id="input"> </textarea>
+          </div>
+          <button class="btn btn-outline-success btn-lg col-2" id="btn-submit" type="submit" value="Send">
+            Send
+          </button>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  localStorage.setItem('contact', '<%=contact.id%>')
+
+
+
+  localStorage.setItem('userDisplay', '<%=owner.id%>')
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="/scripts/chat.js"></script>
+
+</script>
+
+</html>

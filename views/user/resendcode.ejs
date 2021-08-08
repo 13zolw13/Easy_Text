@@ -1,0 +1,16 @@
+<% layout('layouts/boilerplate') -%>
+
+
+<div class="row align-items-center d-flex justify-content-center v-100 my-auto">
+    <div class="mx-auto col-sm-6 offset-sm-3 justify-content-center">
+        <form action="/user/resend" method="POST" class=" formSize justify-content-center mx-auto">
+            <div class="mb-3">
+                <label for="Login" class="form-label">Enter your email adress</label>
+                <input name="email" type="text" class="form-control" id="email" />
+            </div>
+            <div class="d-grid gap-2 mb-3">
+                <button class="btn btn-primary" type="submit">Send!</button>
+            </div>
+        </form>
+    </div>
+</div>

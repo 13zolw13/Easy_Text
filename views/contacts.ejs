@@ -1,0 +1,56 @@
+<% layout('layouts/boilerplate') -%>
+<div class="container-fluid">
+  <h2 class="text-center">Your contacts</h2>
+  <div class="row text-allign-center">
+    <div class="col-6 offset-3">
+
+
+      <div class="btn-group">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          Find your contact </button>
+        <div class="dropdown-menu col-auto">
+
+          <form class="row g-3 mx-auto my-auto" action="">
+            <div class="mb-3 col-auto">
+
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                placeholder="Find your contact" />
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-danger inline" type="submit">Find contact</button></div>
+          </form>
+
+        </div>
+        <div class="btn-group ">
+          <button class="btn btn-secondary   dropdown-menu-end dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Add new contact
+          </button>
+          <div class="dropdown-menu col-auto">
+            <form class="row g-3 my-auto mx-2" action="">
+              <div class="mb-3 col-auto">
+
+
+                <input type="text" class="form-control" id="SearchingNew" placeholder="Add new contact" />
+              </div>
+              <div class="col-auto">
+                <button class="btn btn-danger inline" type="submit">Add</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul>
+      <div class="row">
+
+        <li>a</li>
+        <li>b</li>
+        <li>c</li>
+        <li>d</li>
+      </div>
+    </ul>
+
+
+  </div>

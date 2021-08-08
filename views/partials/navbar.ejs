@@ -1,0 +1,32 @@
+<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark px-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">ET</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li>
+          <% if ((LoginUser)&& (LoginGoogleUser)){ %>
+          <a class="nav-link" href="/user/<%=LoginGoogleUser._id%>">My profile</a>
+          <% } %>
+          <% if ((LoginUser)&& (!LoginGoogleUser)){ %>
+          <a class="nav-link" href="/user/<%=LoginUser._id%>">My profile</a>
+          <% } %>
+        </li>
+      </ul>
+      <div class="navbar-nav ms-auto">
+        <% if (!LoginUser){ %>
+        <a class="nav-link" href="/user/login">Login</a>
+        <a class="nav-link" href="/user/register">Register</a>
+        <%}else{ %>
+        <a class="nav-link" href="/user/logout">Logout</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,30 @@
+.cover-container {
+  max-width: 60vw;
+
+  color: red;
+}
+
+body {
+  height: 100vw;
+  background-image: linear-gradient(
+      0,
+      rgba(102, 102, 102, 0.6),
+      rgba(31, 27, 27, 0.7)
+    ),
+    url(https://res.cloudinary.com/dml53vesv/image/upload/v1618144585/easyTexting/chris-adamus-_aNFQ_7RxNc-unsplash_1_munnvy.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+.positionText {
+  vertical-align: 30%;
+}
+
+h2 {
+  margin-top: 20px;
+  color: yellow;
+}
+.enterBtn {
+  width: 200px;
+}

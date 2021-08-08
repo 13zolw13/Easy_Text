@@ -1,0 +1,154 @@
+<% layout('layouts/boilerplate') -%>
+
+<div class="row align-items-center h-100">
+  <div class="col-4 offset-4">
+
+    <div class="card text-center">
+      <div class="card-header">Account details</div>
+      <% if (!User.avatar) {%> <div class="text-center ">
+        <img
+          src="https://res.cloudinary.com/dml53vesv/image/upload/w_200/v1618598126/easyTexting/blank-avatar_thtult.png"
+          class="img-card my-2 justify-content-center" style="width: 200px;" alt="..." /></div>
+      <% }   else { %> <div class="text-center ">
+        <img src="<%= User.avatar %> " class="img-card  my-2 justify-content-center" style="width: 200px;" alt="">
+      </div>
+      <% } %>
+      <div class="card-body">
+        <p class="card-title">Username: <%= User.username %></p>
+        <p class="card-text">User email: <%=User.email %></p>
+        <%  if ((LoginUser._id === User.id) || ((LoginUser.id) &&(LoginUser.id === User.googleId))) { %>
+        <p> <%=  LoginUser.id %> <%= User.googleId %></p>
+        <div class="card-body">
+          <a role="button" href="/user/<%=User._id%>/edit" class="btn btn-primary btn-md">Edit</a>
+
+          <form class="d-inline" method="POST" action="/user/<%=User._id%>?_method=DELETE">
+            <button type="submit" class="btn btn-danger btn-md">Delete</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5>Contacts</h5>
+        <div class="col mb-3">
+
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success btn-sm" type="submit"> <i type class="bi bi-search"></i>
+            </button>
+
+          </form>
+        </div>
+
+        <div class="row align-items-center">
+
+          <ul class="col-12 list-group mx-auto mb-3">
+
+            <% for ( let friend  of User.contacts ){ %>
+            <% if ( friend.targetId.id !== User.id && (friend.targetId.username)){ %>
+
+            <li class="list-group-item mx-auto  col-12 ">
+              <div class="row">
+                <a class="col-6 g-3 my-auto" href="/user/<%=friend.targetId.id%>">
+                  <%= friend.targetId.username%> </a>
+
+                <form class="col-4 g-3 mt-auto" action="/chat/<%= friend.id %> ">
+                  <div class="g-3  col-3">
+                    <button class="btn btn-primary" type="submit">Text</button>
+                  </div>
+                </form>
+              </div>
+              <div class="row bg-light"> <%= friend.message[friend.message.length-1].msg %> </div>
+            </li>
+
+            <% } %>
+            <% if ( friend.ownerId.id !== User.id){ %>
+
+            <li class="list-group-item mx-auto  col-12 ">
+              <div class="row">
+                <a class="col-6 g-3 my-auto" href="/user/<%=friend.ownerId.id%>">
+                  <%= friend.ownerId.username %> </a>
+                <form class="col-4 g-3 mt-auto" action="/chat/<%= friend.id %> ">
+                  <div class="g-3  col-3">
+                    <button class="btn btn-primary" type="submit">Text</button>
+                  </div>
+                </form>
+              </div>
+              <div class="row bg-light"> <%if (friend.message[0]){ %>
+                <%= friend.message[friend.message.length-1].msg %>
+                <%  }%>
+              </div>
+            </li>
+            <% } %>
+            <% } %>
+          </ul>
+        </div>
+        <div class="row">
+
+          <div class="btn-group ">
+            <button class="btn btn-secondary   dropdown-menu-end dropdown-toggle" type="button" id="dropdownMenuButton"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Add new contact
+            </button>
+            <div class="dropdown-menu col-auto">
+              <form class="row g-3 my-auto mx-2" method="POST" action="/user/<%=User._id%>/searchnewcontact">
+                <div class="mb-3 col-auto">
+
+
+                  <input name="SearchName" type="text" class="form-control" id="SearchingNew"
+                    placeholder="Add new contact" />
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-danger inline" type="submit">Find</button>
+
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="row mt-3">
+          <%  if (newContact)  {%>
+          <ul class="list-group mx-auto col-auto">
+            <li class="list-group-item ms-3 col-12 ">
+              <div class="row">
+
+                <div class="col-3 mx-auto">
+                  <img class='img-thumbnail float-start ' src="<%= newContact.avatar %>" alt="">
+
+
+                </div>
+                <div class="col-5 my-auto"><%=newContact.username%></div>
+                <div class='col-auto mx-auto my-auto'>
+                  <form class=" col-4 g-3 mt-auto" method=" POST" action="/user/<%=User._id%>/addcontact">
+                    <div class="col-12">
+                      <button type="submit" name="newContactId" value="<%=newContact._id%>" class="btn btn-primary">
+                        Add</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </li>
+          </ul><% } %>
+        </div>
+        <% }  %>
+      </div>
+    </div>
+
+  </div>
+
+  <%  if ((LoginUser._id !== User.id) || ((LoginUser.id )&&( LoginUser.id !== User.googleId))) { %>
+  <div class="text-align-center">
+    <form action='/user/<%=User._id%>/addcontact' method="POST">
+      <button class="btn btn-warning" type="submit"> Text </button>
+    </form>
+  </div>
+  <% }%>
+
+
+
+</div>
