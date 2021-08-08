@@ -17,7 +17,7 @@
         <p class="card-title">Username: <%= User.username %></p>
         <p class="card-text">User email: <%=User.email %></p>
         <%  if ((LoginUser._id === User.id) || ((LoginUser.id) &&(LoginUser.id === User.googleId))) { %>
-        <p> <%=  LoginUser.id %> <%= User.googleId %></p>
+        
         <div class="card-body">
           <a role="button" href="/user/<%=User._id%>/edit" class="btn btn-primary btn-md">Edit</a>
 
@@ -138,16 +138,18 @@
         <% }  %>
       </div>
     </div>
-
+    <%  if ((LoginUser._id )&&(LoginUser._id !== User.id) || ((LoginUser.id )&&( LoginUser.id !== User.googleId))) { %>
+    <div class="justify-content-center">
+      <form action='/user/<%=User._id%>/addcontact' class="justify-content-center" method="POST">
+        <div class="d-grid gap-2">
+          <button class="btn btn-warning" type="submit"> Text </button>
+        </div>
+      </form>
+    </div>
+    <% }%>
   </div>
 
-  <%  if ((LoginUser._id !== User.id) || ((LoginUser.id )&&( LoginUser.id !== User.googleId))) { %>
-  <div class="text-align-center">
-    <form action='/user/<%=User._id%>/addcontact' method="POST">
-      <button class="btn btn-warning" type="submit"> Text </button>
-    </form>
-  </div>
-  <% }%>
+
 
 
 
