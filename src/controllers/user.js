@@ -223,9 +223,9 @@ module.exports.renderLoginPage =  (req, res) => {
 
 module.exports.loginAuthentication =  (req, res, next) => {
  
-  //  req.flash("success", " Welcome back!");
+   req.flash("success", " Welcome back!");
 
-  const redirectUrl = req.session.returnTo || "/";
+  const redirectUrl = req.session.returnTo || `/user/${req.user._id}`;
   delete req.session.returnTo;
 
   
@@ -276,9 +276,11 @@ module.exports.resendToken = async (req, res) => {
         if (err) {
           return res.status(500).send({ msg: err.message });
         }
+          req.flash("success", "A verification email has been sent to you");
+
         res
           .status(200)
-          .send("A verification email has been sent to " + User.email + ".");
+          .redirect("/");
       });
   } catch (e) {
     console.log('error', e)
@@ -292,7 +294,7 @@ module.exports.logoutUser = (req, res) => {
   req.logout();
   res.locals.LoginUser = null
   req.session.destroy();
-  console.log("You have been logout!");
+  req.flash("success", "You`ve been logout!");
   res.redirect("/");
 };
 
@@ -309,6 +311,7 @@ module.exports.passwordChange = async (req, res) => {
     if (req.body.newPassword1 === req.body.newPassword2) {
       const User = await UserSchema.findById(req.params.id)
       User.changePassword(req.body.oldPassword, req.body.newPassword1);
+      req.flash("success", "Your password has been successfully changed");
       return res.redirect(`/user/${User.id}`);
     }
 
@@ -345,6 +348,7 @@ module.exports.lostPassword = async (req, res) => {
         if (err) {
           return res.status(500).send({ msg: err.message });
         }
+         req.flash("success", "An email with new password has been sent to you");
         res
           .status(200)
       });

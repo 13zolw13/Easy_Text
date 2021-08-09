@@ -32,7 +32,7 @@ router.get("/login/google", passport.authenticate("google", {
 
 // LOGIN PAGE
 router.route("/login").get(user.renderLoginPage).post(passport.authenticate("local", {
-    //   failureFlash: true,
+      failureFlash: 'Invalid password or username',
       failureRedirect: "/user/login",
     }), user.loginAuthentication);
 

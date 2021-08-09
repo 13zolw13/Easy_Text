@@ -9,7 +9,8 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const methodOverride = require("method-override");
 const cors = require("cors");
-
+const flash = require('connect-flash');
+const { body, validationResult } = require('express-validator');
 // Routes 
 const UserRoutes = require('./routes/user');
 const ChatRoutes = require('./routes/chat');
@@ -47,11 +48,15 @@ app.use(express.json());
 app.set("view engine", "ejs"); // so you can render('index')
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(session(sessionCfg));
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(async (req, res, next) => {
+
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
   res.locals.LoginUser = req.user;
 
   if ( typeof req.user !== 'undefined') {
