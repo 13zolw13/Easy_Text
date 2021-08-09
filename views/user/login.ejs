@@ -2,15 +2,15 @@
 
 <div class="row align-items-center d-flex justify-content-center v-100 my-auto">
   <div class="mx-auto col-sm-6 offset-sm-3 justify-content-center">
-    <form action="/user/login" method="POST" class=" formSize justify-content-center mx-auto">
+    <form action="/user/login" method="POST" class="validationForm formSize justify-content-center mx-auto " novalidate>
       <div class="mb-3">
-        <label for="Login" class="form-label">Login</label>
-        <input name="username" type="text" class="form-control" id="Login" />
+        <label for="username class=" form-label">Login</label>
+        <input name="username" type="text" class="form-control" id="username" required />
       </div>
 
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input name="password" type="password" class="form-control" id="exampleInputPassword1" />
+        <input name="password" type="password" class="form-control" id="password" required />
       </div>
 
       <a class="text-center  justify-content-center  text-nowrap mt-2 ml-3" href="/user/lostpassword"> Click here if
@@ -35,3 +35,5 @@
 </div>
 </div>
 </div>
+
+<script src="/scripts/formValidate.js"></script>

@@ -31,7 +31,10 @@ router.get("/login/google", passport.authenticate("google", {
 }), user.loginGoogle);
 
 // LOGIN PAGE
-router.route("/login").get(user.renderLoginPage).post(user.loginAuthentication);
+router.route("/login").get(user.renderLoginPage).post(passport.authenticate("local", {
+    //   failureFlash: true,
+      failureRedirect: "/user/login",
+    }), user.loginAuthentication);
 
 // SENDING CONFIMATION TOKKEN
 router.get("/confirmation/:token", user.confirmationToken);

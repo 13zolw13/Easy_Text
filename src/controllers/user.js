@@ -221,37 +221,16 @@ module.exports.renderLoginPage =  (req, res) => {
   res.render("user/login");
 }
 
-module.exports.loginAuthentication=  async (req, res, next) => {
-  try {
-    const username = req.body.username;
-    const password = req.body.password;
-    // console.log(username, password);
-    const user = await UserSchema.findOne({ username: username });
-    console.log("verified", user.status);
-    if (user.status) {
-      const checkuser = await UserSchema.authenticate()(username, password);
-      // console.log(checkuser);
-      if (!checkuser.user) {
-        console.log("wrong password");
-        return res.redirect("user/login");
-      } else {
-        req.logIn(checkuser.user, (err) => {
-          if (err) {
-            return next(err);
-          }
-        });
-    
-        
-        return res.redirect(`/user/${checkuser.user.id}`);
-       
-      }
-    }
-  } catch (e) {
-    console.log('error',e.message);
-    res.redirect("/user/login");
-  }
-}
+module.exports.loginAuthentication =  (req, res, next) => {
+ 
+  //  req.flash("success", " Welcome back!");
 
+  const redirectUrl = req.session.returnTo || "/";
+  delete req.session.returnTo;
+
+  
+  res.redirect(redirectUrl)
+}
 module.exports.confirmationToken = async (req, res) => {
   try {
     const activeToken = await Token.findOne({ token: req.params.token });

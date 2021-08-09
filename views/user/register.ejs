@@ -3,7 +3,7 @@
 
 <div class="row align-items-center d-flex justify-content-center v-100 my-auto">
   <div class="col-6 offset-3 justify-content-center mx-auto">
-    <form action="/user/register" method="POST" class="formSize mx-auto">
+    <form action="/user/register" method="POST" class="validationForm formSize  mx-auto" novalidate>
       <div class="mb-3">
         <label for="Login" class="form-label">Login</label>
         <input name="User[username]" type="text" class="form-control" id="Login" required />
@@ -45,3 +45,6 @@
 </div>
 </div>
 </div>
+
+
+<script src="/scripts/formValidate.js"></script>
