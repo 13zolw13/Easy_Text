@@ -235,9 +235,10 @@ module.exports.confirmationRegistretion = async (req, res) => {
   const errors = validationResult(req);
   try {
     {
-      const errors = validationResult(req);
+      
       if (!errors.isEmpty()) {
-        req.flash('error', errors);
+        console.log(errors)
+        req.flash('error', 'Something went wrong');
         return res.redirect('/');
       }
       const {

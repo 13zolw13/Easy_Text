@@ -17,7 +17,7 @@ const upload = multer({
 })
 
 
-router.route("/register").get(user.renderRegisterPage).post(body('username').isString(),body('email').isEmail(), user.confirmationRegistretion);
+router.route("/register").get(user.renderRegisterPage).post(body('User.username').isLength({ min: 5 }),body('User.email').isEmail(), user.confirmationRegistretion);
 
 
 
