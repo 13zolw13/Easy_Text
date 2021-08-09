@@ -9,7 +9,7 @@ const messages = document.getElementById('messages');
 
  const contact = localStorage.getItem('contact');
  const userDisplay = localStorage.getItem('userDisplay');
-let pusher = new Pusher(process.env.PUSHER_KEY, {
+let pusher = new Pusher("2fbd7f578317fbccc208", {
   cluster: "eu",
 });
 

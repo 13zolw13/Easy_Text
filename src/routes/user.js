@@ -6,6 +6,7 @@ const user = require('../controllers/user')
 const {
     passport
 } = require('../passport/passport');
+const { body, validationResult } = require('express-validator');
 
 const {
     storage
@@ -16,7 +17,7 @@ const upload = multer({
 })
 
 
-router.route("/register").get(user.renderRegisterPage).post(user.confirmationRegistretion);
+router.route("/register").get(user.renderRegisterPage).post(body('username').isString(),body('email').isEmail(), user.confirmationRegistretion);
 
 
 

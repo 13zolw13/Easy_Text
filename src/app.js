@@ -10,7 +10,8 @@ const session = require("express-session");
 const methodOverride = require("method-override");
 const cors = require("cors");
 const flash = require('connect-flash');
-const { body, validationResult } = require('express-validator');
+
+
 // Routes 
 const UserRoutes = require('./routes/user');
 const ChatRoutes = require('./routes/chat');

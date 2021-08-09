@@ -4,6 +4,7 @@ module.exports.isLoggedIn = (req, res, next) => {
 
     if (!req.isAuthenticated()) {
         console.log('User not logged in');
+        req.flaash(error,'You need to be login')
         return res.redirect('/user/login');
     } else {
         console.log('User logged in');
@@ -21,9 +22,12 @@ module.exports.isValidatedUser = async (req, res, next) => {
     if ((id !==
         userId)&&(userId!==googleUser.googleId)) {
         console.log('Not authorized user');
+        req.flaash(error, 'Not authorized user');
         return res.redirect('/');
     } else {
         console.log('Authorized Users ');
         next()
     }
 };
+
+
