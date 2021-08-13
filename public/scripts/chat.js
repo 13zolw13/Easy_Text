@@ -1,4 +1,4 @@
-require('dotenv').config()
+
   
 
 const messages = document.getElementById('messages');
@@ -22,10 +22,11 @@ let pusher = new Pusher("2fbd7f578317fbccc208", {
  $('#btn-submit').on('click', () => {
    const message = $('#input').val();
    $('#input').val('');
-
-   $.post(`/chat/${contact}`, {
-     message
-   })
+   if ((message !== ' ')&& (message !== '')) {
+     $.post(`/chat/${contact}`, {
+       message
+     })
+   }
 
  })
 

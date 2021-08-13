@@ -108,12 +108,15 @@ module.exports.addNewContact = async (req, res) => {
         await Target.save();
         await Owner.save();
 
-        console.log('User new conctacts saved', Owner.contacts);
+        req.flesh('succes', 'New contact has been added!');
+        console.log('User new conctact saved', Owner.contacts);
         return res.redirect(`/user/${Owner.id}`)
       }
     }
 
   } catch (e) {
+        req.flesh('error', 'User does not exist.');
+
     console.log('Error->', e)
     res.redirect(`/user/${req.params.id}`);
 
@@ -156,7 +159,15 @@ module.exports.deleteUser = async (req, res) => {
 }
 
 module.exports.editUser = async (req, res) => {
+    const errors = validationResult(req);
   try {
+     
+
+      if (!errors.isEmpty()) {
+        console.log(errors)
+        req.flash('error', 'Something went wrong');
+        return res.redirect('/');
+      }
     const {
       id
     } = req.params;
@@ -235,7 +246,7 @@ module.exports.confirmationRegistretion = async (req, res) => {
   const errors = validationResult(req);
   try {
     {
-      
+
       if (!errors.isEmpty()) {
         console.log(errors)
         req.flash('error', 'Something went wrong');
@@ -299,6 +310,8 @@ module.exports.loginGoogle = async (req, res) => {
       //  const googleUser= await googleId.findOne({ googleId: profile.id });
       console.log('Data after login from  User.id', User.id);
       // res.redirect(`/user/${User.id}`);
+        req.flash("success", " Welcome back!");
+
       res.redirect(`/user/${User.id}`);
     }
   } catch (e) {
@@ -332,7 +345,9 @@ module.exports.confirmationToken = async (req, res) => {
     if (verUser && verUser.status === false) {
       verUser.status = true;
       verUser.save();
-      return res.redirect("user/login");
+        req.flash("success", "Your account has been activated!");
+
+      return res.redirect("/user/login");
     } else {
       return res.send("something went wrong!");
     }
@@ -386,11 +401,13 @@ module.exports.resendToken = async (req, res) => {
 };
 
 module.exports.logoutUser = (req, res) => {
+   
   req.logout();
+  req.flash("success", "You`ve been logout!");
   res.locals.LoginUser = null
   req.session.destroy();
-  req.flash("success", "You`ve been logout!");
   res.redirect("/");
+
 };
 
 module.exports.renderNewPasswordPage = async (req, res) => {

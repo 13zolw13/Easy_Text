@@ -4,8 +4,16 @@ const {
   pusher
 } = require('../pusher/pusher');
 
+const {
+  body,
+  validationResult
+} = require('express-validator');
+
+
 module.exports.pusherChat = async (req, res, next) => {
+       
   try {
+   
     const {
       id
     } = req.params;
@@ -42,10 +50,13 @@ module.exports.pusherChat = async (req, res, next) => {
     });
     await conv.message.push(newMsg);
     await conv.save();
+    
     // res.json(message)
     next();
   } catch (e) {
-    console.log('Error->', e)
+    console.log('Error->', e);
+
+    req.flash('error', e);
     res.redirect(`/`);
   }
 
@@ -150,8 +161,9 @@ module.exports.pusherAuth = async function (req, res) {
     const auth = pusher.authenticate(socketId, channel, userId);
     res.send(auth);
   } catch (e) {
+      req.flash("error", e);
     console.log('Error->', e);
-    res.status('505');
+    res.status('505').redirect('/user/login');
   }
 
 

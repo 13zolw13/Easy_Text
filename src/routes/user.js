@@ -57,7 +57,7 @@ router.post("/:id/searchnewcontact", isLoggedIn, isValidatedUser, user.findNewCo
 //Adding new contact
 router.post("/:id/addcontact", isLoggedIn, user.addNewContact);
 //  RENDERING DEATAIL PAGE OF A USER
-router.route('/:id' ).get(isLoggedIn, user.renderUserPage).put(isValidatedUser,isLoggedIn,upload.single('image'), user.editUser).delete(user.deleteUser);
+router.route('/:id' ).get(isLoggedIn, user.renderUserPage).put(isValidatedUser,isLoggedIn,upload.single('image'),body('UserEdit.username').isLength({ min: 5 }),body('UserEdit.email').isEmail(), user.editUser).delete(user.deleteUser);
 
 
 

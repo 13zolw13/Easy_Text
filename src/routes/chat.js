@@ -1,4 +1,8 @@
 const express = require("express");
+const {
+  body,
+  validationResult
+} = require('express-validator');
 const router = express.Router();
 const chat = require('../controllers/chat');
 const catchAsync = require('../utilities/catchAsync');
